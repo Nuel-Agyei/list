@@ -20,13 +20,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Todo extends StatefulWidget {
-  const Todo({super.key});
-
-  @override
-  State<Todo> createState() => _TodoState();
-}
-
 class _TodoState extends State<Todo> {
   @override
   Widget build(BuildContext context) {
@@ -39,10 +32,55 @@ class _TodoState extends State<Todo> {
         child: Text('Hello, World!'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.red[500],
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddListPage()),
+          );
+        },
+        backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
-      )),
+      ),
+    );
+  }
+}
+
+// new page
+
+class AddListPage extends StatefulWidget {
+  const AddListPage({super.key});
+
+  @override
+  _AddListPageState createState() => _AddListPageState();
+}
+
+class _AddListPageState extends State<AddListPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Add a List'),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter list title',
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                // Add code to save list and navigate back to main screen
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
